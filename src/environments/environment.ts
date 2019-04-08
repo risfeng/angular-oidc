@@ -2,8 +2,23 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { WebStorageStateStore } from "oidc-client";
+
 export const environment = {
-  production: false
+  production: false,
+  authConfig: {
+    authority: "http://192.168.1.68:10000",
+    client_id: "query",
+    redirect_uri: "http://localhost:4200/login-callback",
+    response_type: "id_token token",
+    scope: "openid profile",
+    post_logout_redirect_uri: "http://localhost:4200",
+    accessTokenExpiringNotificationTime: 4,
+    filterProtocolClaims: true,
+    silentRequestTimeout: 10000,
+    loadUserInfo: true,
+    userStore: new WebStorageStateStore({ store: window.localStorage }),
+  },
 };
 
 /*
